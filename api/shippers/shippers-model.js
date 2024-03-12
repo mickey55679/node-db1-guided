@@ -21,8 +21,10 @@ async function getById(shipperId) {
   return result
 }
 
-async function create() {
-  return 'create wired'
+async function create(shipper) {
+  const [shipperid] = await db('shippers').insert(shipper)
+  const result = await getById(shipperid)
+  return result
 }
 
 async function update() {
