@@ -27,10 +27,15 @@ async function create(shipper) {
   return result
 }
 
-async function update() {
-  return 'update wired'
+async function update(shipperId, changes) {
+await db('shippers').update(changes).where('shipperid', shipperId)
+const result = await getById(shipperId);
+return result
 }
 
-async function remove() {
-  return 'delete wired'
+async function remove(shipperId) {
+  const toBedeleted = await getById(shipperId)
+ await db('shippers').del().where('shipperid', shipperId)
+ return toBedeleted
+
 }
